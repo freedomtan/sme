@@ -1,15 +1,15 @@
     .text
-    .global _sve_support
+    .global sve_support
     .align 4
-_sve_support:
+sve_support:
     ptrue p0.b
     fmla z0.s, p0/m, z30.s, z31.s
     ret
 
 
-    .global _sve_streaming_support
+    .global sve_streaming_support
     .align 4
-_sve_streaming_support:
+sve_streaming_support:
     smstart
     ptrue p0.b
     fmla z0.s, p0/m, z30.s, z31.s
@@ -17,9 +17,9 @@ _sve_streaming_support:
     ret
 
 
-    .global _sme_support
+    .global sme_support
     .align 4
-_sme_support:
+sme_support:
     smstart
     ptrue p0.b
     ptrue p1.b
@@ -27,18 +27,18 @@ _sme_support:
     smstop
     ret
 
-    .global _sme2_support
+    .global sme2_support
     .align 4
-_sme2_support:
+sme2_support:
     smstart
     mov w8, #0
     bfdot za.s[w8, #0], {z0.h, z1.h}, z2.h
     smstop
     ret
 
-    .global _sve_streaming_vlength
+    .global sve_streaming_vlength
     .align 4
-_sve_streaming_vlength:
+sve_streaming_vlength:
     smstart
     ldr z0, [x0]
     str z0, [x1]
@@ -46,9 +46,16 @@ _sve_streaming_vlength:
     ret
 
 
-    .global _neon_bf16_support
+    .global sve_vlength
     .align 4
-_neon_bf16_support:
+sve_vlength:
+    ldr z0, [x0]
+    str z0, [x1]
+    ret
+
+    .global neon_bf16_support
+    .align 4
+neon_bf16_support:
     bfmmla v0.4s, v1.8h, v2.8h
     ret
 

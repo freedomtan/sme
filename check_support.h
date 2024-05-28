@@ -6,5 +6,6 @@ void check_sve_support();
 void check_streaming_sve_support();
 void check_sme_support();
 int check_sve_streaming_length();
+int check_sve_length();
 
 #endif
